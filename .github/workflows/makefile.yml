@@ -12,14 +12,14 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: /rd/project/deeptest
+        working-directory: /root/rd/project/deeptest
     steps:
       - name: checkout backend codes
         run: git pull
 
       - name: checkout frontend codes
         run: git pull
-        working-directory: /rd/project/deeptest-ui
+        working-directory: /root/rd/project/deeptest-ui
 
       - name: make server
         run: ENV=dp make compile_server_linux
@@ -32,12 +32,12 @@ jobs:
 
       - name: copy files
         run:  |
-          mkdir -p /rd/server
-          cp -f bin/linux/deeptest-server /rd/server/
-          cp -f client/bin/linux/deeptest-agent /rd/server/
+          mkdir -p /root/rd/server
+          cp -f bin/linux/deeptest-server /root/rd/server/
+          cp -f client/bin/linux/deeptest-agent /root/rd/server/
           
-          rm -rf /rd/server/deeptest-ui
-          cp -fr client/ui /rd/server/deeptest-ui
+          rm -rf /root/rd/server/deeptest-ui
+          cp -fr client/ui /root/rd/server/deeptest-ui
 
       - name: start service
         run:  |
